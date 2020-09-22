@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -15,21 +15,21 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/card (GET) Eligible Anywhere and Liquid cards', async () => {
+  it('/cards (GET) Eligible Anywhere and Liquid cards', async () => {
     const response = await request(app.getHttpServer())
-      .get('/card?employment=full-time&income=34000')
+      .get('/cards?employment=full-time&income=34000')
     expect(response.body).toEqual(["Anywhere Card", "Liquid Card"])
   });
 
-  it('/card (GET) Eligible Anywhere, Liquid and Student cards', async () => {
+  it('/cards (GET) Eligible Anywhere, Liquid and Student cards', async () => {
     const response = await request(app.getHttpServer())
-      .get('/card?employment=student&income=17000')
-    expect(response.body).toEqual(["Anywhere Card", "Liquid Card", "Student Card"])
+      .get('/cards?employment=student&income=17000')
+    expect(response.body).toEqual(["Anywhere Card", "Liquid Card", "Student Life"])
   });
 
-  it('/card (GET) Eligible Anywhere cards', async () => {
+  it('/cards (GET) Eligible Anywhere cards', async () => {
     const response = await request(app.getHttpServer())
-      .get('/card?employment=part-time&income=15000')
+      .get('/cards?employment=part-time&income=15000')
     expect(response.body).toEqual(["Anywhere Card"])
   });
 });
