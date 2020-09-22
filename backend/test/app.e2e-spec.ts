@@ -49,9 +49,8 @@ describe('AppController (e2e)', () => {
 
   it('/cards/details (GET) details on Anywhere card', async () => {
     const response = await request(app.getHttpServer())
-      .get('/cards?card=anywhere-card');
-    expect(response.body).toEqual({
-      'anywhere-card': {
+      .get('/cards/details?card=anywhere-card');
+    expect(response.body.details).toEqual({
         'name': 'Anywhere Card',
         'Apr':
           33.9,
@@ -61,7 +60,6 @@ describe('AppController (e2e)', () => {
           0,
         'Credit Available':
           300,
-      },
     });
   });
 });

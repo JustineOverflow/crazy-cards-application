@@ -2,7 +2,8 @@ import { Controller, Get, HttpStatus, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 
 const cards = {
-  'Student Life': {
+  'student-Life': {
+    'name': 'Student Life',
     'Apr':
       18.9,
     'Balance Transfer Offer Duration':
@@ -12,7 +13,8 @@ const cards = {
     'Credit Available':
       1200,
   },
-  'Anywhere Card': {
+  'anywhere-card': {
+    'name': 'Anywhere Card',
     'Apr':
       33.9,
     'Balance Transfer Offer Duration':
@@ -22,7 +24,8 @@ const cards = {
     'Credit Available':
       300,
   },
-  'Liquid Card': {
+  'liquid-card': {
+    'name': 'Liquid Card',
     'Apr':
       33.9,
     'Balance Transfer Offer Duration':
@@ -71,4 +74,21 @@ export class CardsController {
 
     response.status(HttpStatus.ACCEPTED).json(eligibles);
   }
+
+  @Get('/details')
+  getCardDetails(@Res() response: Response,
+                 @Query('card') card?: string) {
+    if (card.length === 0) {
+      response.status(HttpStatus.BAD_REQUEST).json({
+        reason: 'No card selected',
+      });
+      return;
+    }
+
+    let details = cards[card];
+
+    response.status(HttpStatus.ACCEPTED).json({details});
+
+  }
+
 }
