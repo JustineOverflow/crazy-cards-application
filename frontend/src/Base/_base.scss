@@ -1,0 +1,40 @@
+// COLORS
+$color-blue-dark: #03045e;
+$color-blue: #00b4d8;
+$color-blue-light: #caf0f8;
+$color-yellow: #ffc803;
+$color-yellow-dark: #fca311;
+$color-mandarin: #FC814A;
+
+
+// FONT
+$font-family: system-ui, sans-serif;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: $font-family;
+  color: black;
+  text-align: center;
+}
+
+button {
+  padding: 1rem;
+  border: 1px solid $color-yellow;
+  border-radius: 30px;
+  background-color: $color-yellow;
+  color: $color-blue-dark;
+  cursor: pointer;
+  margin: 1rem;
+  font-size: 1.3rem;
+}

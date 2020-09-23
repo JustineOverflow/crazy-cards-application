@@ -1,0 +1,24 @@
+.welcome {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 2rem;
+  padding: 1rem 10rem;
+
+  &-description {
+    font-size: 1.7rem;
+    justify-self: right;
+    align-self: center;
+    text-align: left;
+    line-height: 40px;
+    color: $color-blue-dark;
+
+    &-text {
+      padding: 1rem;
+    }
+  }
+
+  &-img {
+    justify-self: center;
+    align-self: center;
+  }
+}
