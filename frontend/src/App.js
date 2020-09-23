@@ -1,13 +1,18 @@
 import React from 'react';
-import Header from "./Header/Header";
+import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom';
 import Welcome from "./Welcome/Welcome";
+import Form from "./Form/Form";
 
 function App() {
   return (
-    <div>
-      <Header/>
-      <Welcome/>
-    </div>
+      <Router>
+          <div>
+              <Switch>
+                  <Route exact path='/' component={Welcome}/>
+                  <Route exact path='/form' component={Form}/>
+              </Switch>
+          </div>
+      </Router>
   );
 }
 

@@ -37,4 +37,9 @@ button {
   cursor: pointer;
   margin: 1rem;
   font-size: 1.3rem;
+  outline: none;
+
+  &:hover {
+    background-color: $color-yellow-dark;
+  }
 }

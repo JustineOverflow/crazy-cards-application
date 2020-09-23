@@ -72,7 +72,7 @@ export class CardsController {
 
     let eligibles = filterEligibleCards(employment, income);
 
-    response.status(HttpStatus.ACCEPTED).json(eligibles);
+    response.status(HttpStatus.ACCEPTED).json({eligibles: eligibles});
   }
 
   @Get('/details')
@@ -87,7 +87,7 @@ export class CardsController {
 
     let details = cards[card];
 
-    response.status(HttpStatus.ACCEPTED).json({details});
+    response.status(HttpStatus.ACCEPTED).json({details: details});
 
   }
 
