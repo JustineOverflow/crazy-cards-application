@@ -12,7 +12,8 @@ class Form extends React.Component {
             eligibleCards: [],
             error: '',
             isSelected: false,
-            cardsDetails: {}
+            cardsDetails: {},
+            totalCredit: 0
         }
         this.updateIncome = this.updateIncome.bind(this)
         this.updateEmployment = this.updateEmployment.bind(this)
@@ -63,10 +64,13 @@ class Form extends React.Component {
 
     async getDetails(event) {
         if (this.state.cardsDetails[event]) {
+            const credit = this.state.cardsDetails[event].credit
+            this.state.totalCredit = this.state.totalCredit - credit;
             delete this.state.cardsDetails[event];
             this.setState({
                 isSelected: false,
-                cardDetails: this.state.cardsDetails
+                cardDetails: this.state.cardsDetails,
+                totalCredit: this.state.totalCredit
             })
         } else {
             let card = event.toLowerCase().replace(/ /g, "-");
@@ -80,9 +84,12 @@ class Form extends React.Component {
                 const body = await response.json()
                 const details = body.details
                 this.state.cardsDetails[details.name] = details
+                const credit = this.state.cardsDetails[details.name].credit
+                this.state.totalCredit = this.state.totalCredit + credit;
                 this.setState({
                     cardsDetails: this.state.cardsDetails,
                     isSelected: true,
+                    totalCredit: this.state.totalCredit
                 })
 
             } catch (error) {
@@ -129,6 +136,9 @@ class Form extends React.Component {
                         <button onClick={this.submit}
                                 className="">Show me the cards
                         </button>
+                    </div>
+                    <div>
+                        <p>Your total amount of credit available is: {this.state.totalCredit}</p>
                     </div>
                     <div className="cards">
                         {this.state.eligibleCards.map(card => {
