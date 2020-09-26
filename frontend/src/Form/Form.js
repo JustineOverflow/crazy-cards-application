@@ -62,26 +62,32 @@ class Form extends React.Component {
     }
 
     async getDetails(event) {
-        let card = event.toLowerCase().replace(/ /g, "-");
-        this.setState({
-            isSelected: true,
-        })
-        try {
-            let response = await fetch(`http://127.0.0.1:3001/cards/details?card=${card}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-            const body = await response.json()
-            const details = body.details
-            this.state.cardsDetails[details.name] = details
+        if (this.state.cardsDetails[event]) {
+            delete this.state.cardsDetails[event];
             this.setState({
-                cardsDetails: this.state.cardsDetails,
+                isSelected: false,
+                cardDetails: this.state.cardsDetails
             })
+        } else {
+            let card = event.toLowerCase().replace(/ /g, "-");
+            try {
+                let response = await fetch(`http://127.0.0.1:3001/cards/details?card=${card}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                const body = await response.json()
+                const details = body.details
+                this.state.cardsDetails[details.name] = details
+                this.setState({
+                    cardsDetails: this.state.cardsDetails,
+                    isSelected: true,
+                })
 
-        } catch (error) {
-            console.log(error)
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 
@@ -128,10 +134,13 @@ class Form extends React.Component {
                         {this.state.eligibleCards.map(card => {
                             return <div key={card} className="cards-container">
                                 <p className="cards-container-title">{card}</p>
+                                <button onClick={() => this.getDetails(card)}
+                                        className={(card in this.state.cardsDetails) ? "cards-container-button-selected" : "cards-container-button"}>
+                                    {(card in this.state.cardsDetails) ? "selected" : "select"}
+                                </button>
                                 {(card in this.state.cardsDetails) ?
                                     <div>
-                                        <div><i className="cards-container-details-icon icon fas fa-info-circle"></i>
-                                        </div>
+                                        <div><i className="cards-container-details-icon icon fas fa-info-circle"></i></div>
                                         <div key={card} className="cards-container-details">
                                             <div>
                                                 Apr: <span
@@ -152,9 +161,6 @@ class Form extends React.Component {
                                         </div>
                                     </div> : <p></p>
                                 }
-                                    <button onClick={() => this.getDetails(card)}
-                                                     className="cards-container-button">Select
-                                    </button>
                             </div>
                         })}
                     </div>
