@@ -1,10 +1,10 @@
 // COLORS
 $color-blue-dark: #03045e;
 $color-blue: #00b4d8;
-$color-blue-light: #caf0f8;
+$color-blue-lighter: #b3dce5;
+$color-white: #ecf7fa;
 $color-yellow: #ffc803;
 $color-yellow-dark: #fca311;
-$color-mandarin: #FC814A;
 
 
 // FONT
@@ -24,8 +24,28 @@ $font-family: system-ui, sans-serif;
 
 body {
   font-family: $font-family;
-  color: black;
+  color: $color-blue-dark;
   text-align: center;
+}
+
+input {
+  padding: 0.8rem;
+  margin: 1rem;
+  outline: none;
+  font-size: 1rem;
+  background-color: $color-white;
+  border: 1px solid $color-blue-lighter;
+  border-radius: 5px;
+}
+
+select {
+  padding: 0.8rem;
+  margin: 1rem;
+  font-size: 1rem;
+  background-color: $color-white;
+  border: 1px solid $color-blue-lighter;
+  outline: none;
+  border-radius: 5px;
 }
 
 button {
@@ -38,8 +58,21 @@ button {
   margin: 1rem;
   font-size: 1.3rem;
   outline: none;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .2);
 
   &:hover {
     background-color: $color-yellow-dark;
   }
+}
+
+.icon {
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+  color: $color-blue;
+  text-align: center;
+}
+
+.error {
+  color: darkred;
 }

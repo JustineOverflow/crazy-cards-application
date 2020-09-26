@@ -5,7 +5,7 @@ class Header extends React.Component {
     render() {
         return (
             <section className="header">
-                <h1 className="header-title"><i className="fas fa-phone-alt"></i>Cards Eligibility</h1>
+                <h1 className="header-title"><i className="icon far fa-credit-card"></i>Cards Eligibility</h1>
             </section>
         );
     }

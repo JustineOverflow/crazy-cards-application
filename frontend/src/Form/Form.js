@@ -1,4 +1,5 @@
 import React from 'react';
+import {ReactComponent as ReactAssess} from "../Form/cards.svg";
 import Header from "../Header/Header";
 
 class Form extends React.Component {
@@ -6,14 +7,17 @@ class Form extends React.Component {
     constructor() {
         super();
         this.state = {
-            employment: '',
-            income: '',
+            employment: 'student',
+            income: '0',
             eligibleCards: [],
-            error: ''
+            error: '',
+            isSelected: false,
+            cardsDetails: {}
         }
         this.updateIncome = this.updateIncome.bind(this)
         this.updateEmployment = this.updateEmployment.bind(this)
         this.submit = this.submit.bind(this)
+        this.getDetails = this.getDetails.bind(this)
     }
 
     updateIncome(event) {
@@ -42,18 +46,43 @@ class Form extends React.Component {
                     employment: '',
                     income: '',
                     eligibleCards: [],
+                    isSelected: false,
                 })
             } else {
                 this.setState({
                     eligibleCards: (await response.json()).eligibles,
-                    error: ''
+                    error: '',
+                    isSelected: false,
                 })
-                console.log(this.state)
             }
         } catch (error) {
             console.log(error)
         }
         event.preventDefault()
+    }
+
+    async getDetails(event) {
+        let card = event.toLowerCase().replace(/ /g, "-");
+        this.setState({
+            isSelected: true,
+        })
+        try {
+            let response = await fetch(`http://127.0.0.1:3001/cards/details?card=${card}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            const body = await response.json()
+            const details = body.details
+            this.state.cardsDetails[details.name] = details
+            this.setState({
+                cardsDetails: this.state.cardsDetails,
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -92,13 +121,44 @@ class Form extends React.Component {
                                 <p className="error">{this.state.error}</p> : <p></p>
                         }
                         <button onClick={this.submit}
-                                className="">Submit form
+                                className="">Show me the cards
                         </button>
                     </div>
-                    {this.state.eligibleCards.map(card =>
-                        <p>
-                            {card}
-                        </p>)}
+                    <div className="cards">
+                        {this.state.eligibleCards.map(card => {
+                            return <div key={card} className="cards-container">
+                                <p className="cards-container-title">{card}</p>
+                                {(card in this.state.cardsDetails) ?
+                                    <div>
+                                        <div><i className="cards-container-details-icon icon fas fa-info-circle"></i>
+                                        </div>
+                                        <div key={card} className="cards-container-details">
+                                            <div>
+                                                Apr: <span
+                                                className="cards-container-details-item">{this.state.cardsDetails[card].apr} %</span>
+                                            </div>
+                                            <div>
+                                                Balance Transfer Offer Duration: <span
+                                                className="cards-container-details-item">{this.state.cardsDetails[card].balance} months</span>
+                                            </div>
+                                            <div>
+                                                Purchase Offer Duration: <span
+                                                className="cards-container-details-item">{this.state.cardsDetails[card].purchase} months</span>
+                                            </div>
+                                            <div>
+                                                Credit Available: <span
+                                                className="cards-container-details-item">£{this.state.cardsDetails[card].credit}</span>
+                                            </div>
+                                        </div>
+                                    </div> : <p></p>
+                                }
+                                    <button onClick={() => this.getDetails(card)}
+                                                     className="cards-container-button">Select
+                                    </button>
+                            </div>
+                        })}
+                    </div>
+                    <ReactAssess/>
                 </section>
             </div>
         );

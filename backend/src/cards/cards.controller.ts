@@ -2,38 +2,29 @@ import { Controller, Get, HttpStatus, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 
 const cards = {
-  'student-Life': {
+  'student-life': {
+    'id': 1,
     'name': 'Student Life',
-    'Apr':
-      18.9,
-    'Balance Transfer Offer Duration':
-      0,
-    'Purchase Offer Duration':
-      6,
-    'Credit Available':
-      1200,
+    'apr': 18.9,
+    'balance': 0,
+    'purchase': 6,
+    'credit': 1200,
   },
   'anywhere-card': {
+    'id': 2,
     'name': 'Anywhere Card',
-    'Apr':
-      33.9,
-    'Balance Transfer Offer Duration':
-      0,
-    'Purchase Offer Duration':
-      0,
-    'Credit Available':
-      300,
+    'apr': 33.9,
+    'balance': 0,
+    'purchase': 0,
+    'credit': 300,
   },
   'liquid-card': {
+    'id': 3,
     'name': 'Liquid Card',
-    'Apr':
-      33.9,
-    'Balance Transfer Offer Duration':
-      12,
-    'Purchase Offer Duration':
-      6,
-    'Credit Available':
-      3000,
+    'apr': 33.9,
+    'balance': 12,
+    'purchase': 6,
+    'credit': 3000,
   },
 };
 
@@ -72,7 +63,7 @@ export class CardsController {
 
     let eligibles = filterEligibleCards(employment, income);
 
-    response.status(HttpStatus.ACCEPTED).json({eligibles: eligibles});
+    response.status(HttpStatus.ACCEPTED).json({ eligibles: eligibles });
   }
 
   @Get('/details')
@@ -87,7 +78,7 @@ export class CardsController {
 
     let details = cards[card];
 
-    response.status(HttpStatus.ACCEPTED).json({details: details});
+    response.status(HttpStatus.ACCEPTED).json({ details: details });
 
   }
 

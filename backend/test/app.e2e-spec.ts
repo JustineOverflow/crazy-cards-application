@@ -51,14 +51,15 @@ describe('AppController (e2e)', () => {
     const response = await request(app.getHttpServer())
       .get('/cards/details?card=anywhere-card');
     expect(response.body.details).toEqual({
+      'id': 2,
       'name': 'Anywhere Card',
-      'Apr':
+      'apr':
         33.9,
-      'Balance Transfer Offer Duration':
+      'balance':
         0,
-      'Purchase Offer Duration':
+      'purchase':
         0,
-      'Credit Available':
+      'credit':
         300,
     });
   });
