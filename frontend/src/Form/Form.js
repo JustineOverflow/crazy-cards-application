@@ -11,7 +11,6 @@ class Form extends React.Component {
             income: '0',
             eligibleCards: [],
             error: '',
-            isSelected: false,
             cardsDetails: {},
             totalCredit: 0
         }
@@ -47,13 +46,11 @@ class Form extends React.Component {
                     employment: '',
                     income: '',
                     eligibleCards: [],
-                    isSelected: false,
                 })
             } else {
                 this.setState({
                     eligibleCards: (await response.json()).eligibles,
                     error: '',
-                    isSelected: false,
                 })
             }
         } catch (error) {
@@ -68,7 +65,6 @@ class Form extends React.Component {
             this.state.totalCredit = this.state.totalCredit - credit;
             delete this.state.cardsDetails[event];
             this.setState({
-                isSelected: false,
                 cardDetails: this.state.cardsDetails,
                 totalCredit: this.state.totalCredit
             })
@@ -88,7 +84,6 @@ class Form extends React.Component {
                 this.state.totalCredit = this.state.totalCredit + credit;
                 this.setState({
                     cardsDetails: this.state.cardsDetails,
-                    isSelected: true,
                     totalCredit: this.state.totalCredit
                 })
 
@@ -137,9 +132,10 @@ class Form extends React.Component {
                                 className="">Show me the cards
                         </button>
                     </div>
-                    <div>
-                        <p>Your total amount of credit available is: {this.state.totalCredit}</p>
-                    </div>
+                    {this.state.eligibleCards.length > 0 ?
+                        <div className="totalCredit">
+                            <p>Your total amount of credit available is: {this.state.totalCredit}</p>
+                        </div> : <div></div>}
                     <div className="cards">
                         {this.state.eligibleCards.map(card => {
                             return <div key={card} className="cards-container">
@@ -150,7 +146,8 @@ class Form extends React.Component {
                                 </button>
                                 {(card in this.state.cardsDetails) ?
                                     <div>
-                                        <div><i className="cards-container-details-icon icon fas fa-info-circle"></i></div>
+                                        <div><i className="cards-container-details-icon icon fas fa-info-circle"></i>
+                                        </div>
                                         <div key={card} className="cards-container-details">
                                             <div>
                                                 Apr: <span
