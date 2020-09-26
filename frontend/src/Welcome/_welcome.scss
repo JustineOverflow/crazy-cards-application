@@ -2,7 +2,12 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 2rem;
-  padding: 1rem 10rem;
+  padding: 1rem 5rem;
+
+  @include respond(phone) {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
 
   &-description {
     font-size: 1.7rem;
@@ -12,6 +17,11 @@
     line-height: 40px;
     color: $color-blue-dark;
 
+    @include respond(phone) {
+      font-size: $subtitle;
+      text-align: center;
+    }
+
     &-text {
       padding: 1rem;
     }
@@ -19,6 +29,6 @@
 
   &-img {
     justify-self: center;
-    align-self: center;
   }
 }
+

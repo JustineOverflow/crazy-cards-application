@@ -134,7 +134,8 @@ class Form extends React.Component {
                     </div>
                     {this.state.eligibleCards.length > 0 ?
                         <div className="totalCredit">
-                            <p>Your total amount of credit available is: {this.state.totalCredit}</p>
+                            <p>Your total amount of credit available is: <span
+                                className="totalCredit-amount">£{this.state.totalCredit}</span></p>
                         </div> : <div></div>}
                     <div className="cards">
                         {this.state.eligibleCards.map(card => {

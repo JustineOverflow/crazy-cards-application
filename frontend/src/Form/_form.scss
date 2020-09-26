@@ -10,6 +10,12 @@
   padding-top: 1rem;
   font-size: $subtitle;
   color: $color-blue;
+
+  &-amount {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: $color-blue-dark;
+  }
 }
 
 .cards {
@@ -20,12 +26,14 @@
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
   &-container {
+    align-self: center;
     background-color: $color-white;
-    padding: 2rem;
+    padding: 1rem;
     margin: 1rem;
     border-radius: 5px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, .2);
     perspective: 1000px;
+    font-size: 0.95rem;
 
     &-title {
       text-shadow: .5rem 1rem 2rem rgba(black, .2);
@@ -39,6 +47,7 @@
       font-size: 1rem;
       color: $color-white;
       padding: .5rem 1rem;
+      margin: 1rem;
 
       &:hover {
         background-color: $color-yellow;
@@ -49,6 +58,7 @@
         background-color: $color-yellow;
         border-radius: 5px;
         padding: .5rem 1rem;
+        margin: 1rem;
         color: $color-blue-dark;
         font-size: 1rem;
       }
@@ -58,9 +68,8 @@
       text-align: left;
 
       &-item {
-        font-weight: 600;
+        font-weight: 700;
         color: $color-blue-dark;
-        font-size: 1.1rem;
       }
       &-icon {
         text-align: center;

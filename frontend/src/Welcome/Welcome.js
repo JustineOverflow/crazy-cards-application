@@ -16,10 +16,10 @@ class Welcome extends React.Component {
                 <section className="welcome">
                     <div className="welcome-description">
                         <p className="welcome-description-text">Fill up a quick form and discover which credit cards are
-                            available to you, instantly</p>
+                            available to you, instantly.</p>
                         <button
                             onClick={() => this.changeRoute()}
-                            className="welcome-container-button">Check my eligible credit cards
+                            className="welcome-container-button">Check my eligibility
                         </button>
                     </div>
                     <div className="welcome-img">
