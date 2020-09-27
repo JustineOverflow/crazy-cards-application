@@ -20,7 +20,7 @@ With the function 'filterEligibleCard', I filter the cards by comparing their re
 I implemented testing on both backend and frontend, to verifies these following points: 
 
 - (Backend) When API called, the algorithm returns the list of eligible cards
-- (Backend) When APi called, the algorithm returns the details of the card
+- (Backend) When API called, the algorithm returns the details of the card
 - (Backend) Data validation (for example, if the user forgets to fill in his employment status)
 - (Frontend) When submit button is clicked, it retrieves the eligible cards
 - (Frontend) When submit button is clicked but information is missing, it returns an error
