@@ -23,10 +23,12 @@
   max-width: 80rem;
   margin: 0 auto;
   display: grid;
+  justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
   &-container {
-    align-self: center;
+    max-width: 30rem;
+    align-self: start;
     background-color: $color-white;
     padding: 1rem;
     margin: 1rem;
@@ -38,6 +40,7 @@
     &-title {
       text-shadow: .5rem 1rem 2rem rgba(black, .2);
       font-size: $subtitle;
+      padding: 1rem 3rem;
     }
 
     &-button {
