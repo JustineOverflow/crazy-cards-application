@@ -2,52 +2,54 @@ import { Controller, Get, HttpStatus, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 
 const cards = {
-  'student-life': {
-    'id': 1,
-    'name': 'Student Life',
-    'apr': 18.9,
-    'balance': 0,
-    'purchase': 6,
-    'credit': 1200,
-  },
-  'anywhere-card': {
-    'id': 2,
-    'name': 'Anywhere Card',
-    'apr': 33.9,
-    'balance': 0,
-    'purchase': 0,
-    'credit': 300,
-  },
-  'liquid-card': {
-    'id': 3,
-    'name': 'Liquid Card',
-    'apr': 33.9,
-    'balance': 12,
-    'purchase': 6,
-    'credit': 3000,
-  },
-};
-
-const conditionPerCard = {
   'Student Life': {
-    'minIncome': 0,
-    'employment': 'student',
+    'details': {
+      'id': 1,
+      'name': 'Student Life',
+      'apr': 18.9,
+      'balance': 0,
+      'purchase': 6,
+      'credit': 1200,
+    },
+    'requirements': {
+      'minIncome': 0,
+      'employment': 'student',
+    },
   },
   'Anywhere Card': {
-    'minIncome': 0,
-    'employment': ['student', 'full-time', 'part-time', 'unemployed'],
+    'details': {
+      'id': 2,
+      'name': 'Anywhere Card',
+      'apr': 33.9,
+      'balance': 0,
+      'purchase': 0,
+      'credit': 300,
+    },
+    'requirements': {
+      'minIncome': 0,
+      'employment': ['student', 'full-time', 'part-time', 'unemployed'],
+    },
   },
   'Liquid Card': {
-    'minIncome': 16000,
-    'employment': ['student', 'full-time', 'part-time', 'unemployed'],
+    'details': {
+      'id': 3,
+      'name': 'Liquid Card',
+      'apr': 33.9,
+      'balance': 12,
+      'purchase': 6,
+      'credit': 3000,
+    },
+    'requirements': {
+      'minIncome': 16000,
+      'employment': ['student', 'full-time', 'part-time', 'unemployed'],
+    },
   },
 };
 
-
 export function filterEligibleCards(employment, income) {
-  return Object.keys(conditionPerCard)
-    .filter(card => income >= conditionPerCard[card].minIncome)
-    .filter(card => conditionPerCard[card].employment.includes(employment));
+  return Object.keys(cards)
+    .filter(card => income >= cards[card].requirements.minIncome)
+    .filter(card => cards[card].requirements.employment.includes(employment));
 }
 
 @Controller('cards')
@@ -71,7 +73,7 @@ export class CardsController {
       return;
     }
 
-    let eligibles = filterEligibleCards(employment, income);
+    const eligibles = filterEligibleCards(employment, income);
     response.status(HttpStatus.ACCEPTED).json({ eligibles: eligibles });
   }
 
@@ -85,7 +87,7 @@ export class CardsController {
       return;
     }
 
-    let details = cards[card];
+    const details = cards[card].details;
     response.status(HttpStatus.ACCEPTED).json({ details: details });
   }
 

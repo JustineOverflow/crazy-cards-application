@@ -49,7 +49,7 @@ describe('AppController (e2e)', () => {
 
   it('/cards/details (GET) details on Anywhere card', async () => {
     const response = await request(app.getHttpServer())
-      .get('/cards/details?card=anywhere-card');
+      .get('/cards/details?card=Anywhere Card');
     expect(response.body.details).toEqual({
       'id': 2,
       'name': 'Anywhere Card',

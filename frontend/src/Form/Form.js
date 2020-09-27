@@ -70,9 +70,9 @@ class Form extends React.Component {
                 totalCredit: this.state.totalCredit
             })
         } else {
-            let card = event.toLowerCase().replace(/ /g, "-");
+            // let card = event.toLowerCase().replace(/ /g, "-");
             try {
-                let response = await fetch(`http://127.0.0.1:3001/cards/details?card=${card}`, {
+                let response = await fetch(`http://127.0.0.1:3001/cards/details?card=${event}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
