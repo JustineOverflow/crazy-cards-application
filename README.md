@@ -31,6 +31,7 @@ I implemented testing on both backend and frontend, to verifies these following 
 
 - React
 - Sass: I used SASS as CSS preprocessor, to have a code more structured, less repeated and easier to write/read.
+
 (Responsive web design)
 
 #### Backend
