@@ -3,7 +3,6 @@ import {fireEvent, render, waitForElement} from '@testing-library/react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Form from "./Form";
 import fetchMock from 'fetch-mock';
-import * as dom from "@testing-library/dom";
 
 describe('Test Form', () => {
     afterEach(() => fetchMock.restore());
@@ -38,7 +37,7 @@ describe('Test Form', () => {
         const {getByText} = render(<Router>
             <Form/>
         </Router>);
-        const button = dom.getByText('Show me the cards');
+        const button = getByText('Show me the cards');
         expect(button).toBeInTheDocument();
         fireEvent.click(button);
         const errorDisplayed = await waitForElement(
