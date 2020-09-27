@@ -40,9 +40,10 @@ class Form extends React.Component {
                     'Content-Type': 'application/json'
                 },
             })
-            if (response.status !== 202) {
+            if (response.status >= 400) {
+                const body = await response.json()
                 this.setState({
-                    error: (await response.json()).reason,
+                    error: body.reason,
                     employment: '',
                     income: '',
                     eligibleCards: [],
@@ -86,7 +87,6 @@ class Form extends React.Component {
                     cardsDetails: this.state.cardsDetails,
                     totalCredit: this.state.totalCredit
                 })
-
             } catch (error) {
                 console.log(error)
             }
@@ -125,7 +125,7 @@ class Form extends React.Component {
                             </div>
                         </div>
                         {
-                            this.state.error.length > 0 ?
+                            this.state.error ?
                                 <p className="error">{this.state.error}</p> : <p></p>
                         }
                         <button onClick={this.submit}
@@ -143,7 +143,7 @@ class Form extends React.Component {
                                 <p className="cards-container-title">{card}</p>
                                 <button onClick={() => this.getDetails(card)}
                                         className={(card in this.state.cardsDetails) ? "cards-container-button-selected" : "cards-container-button"}>
-                                    {(card in this.state.cardsDetails) ? "selected" : "select"}
+                                    {(card in this.state.cardsDetails) ? "Selected" : "Select"}
                                 </button>
                                 {(card in this.state.cardsDetails) ?
                                     <div>
