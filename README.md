@@ -9,9 +9,11 @@ https://drive.google.com/file/d/1RLNkcDev5MZC_4AB4aOOIHgFtd3HJ0_n/view?usp=shari
 
 ## Approach overview
 
-### Algorithm returning the eligible cards
+### Algorithm
 
-The server needs to send back to the client a list of eligible cards matching the user profile. It also needs to send the details of the requested card. For this, I use a Hashmap storing all the necessary information (requirements and details per card). It makes it really efficient for the algorithm to check if the requirement are met, and retrieve the card details, thanks to the HashMap lookup complexity time of O(1).
+The server needs to send back to the client a list of eligible cards matching the user profile. It also needs to send the details of the requested card. For this, I use a Hashmap storing all the necessary information (requirements and details per card). It makes it really efficient for the algorithm to check the requirements, and find the card details, thanks to the HashMap lookup complexity time of O(1).
+
+With the function 'filterEligibleCard', I filter the cards by comparing their requirements in terms of income and employment with the user input. 
 
 ### Testing
 
