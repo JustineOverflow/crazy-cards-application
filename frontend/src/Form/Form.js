@@ -47,11 +47,13 @@ class Form extends React.Component {
                     employment: '',
                     income: '',
                     eligibleCards: [],
+                    cardsDetails: {},
                 })
             } else {
                 this.setState({
                     eligibleCards: (await response.json()).eligibles,
                     error: '',
+                    cardsDetails: {},
                 })
             }
         } catch (error) {
@@ -70,7 +72,6 @@ class Form extends React.Component {
                 totalCredit: this.state.totalCredit
             })
         } else {
-            // let card = event.toLowerCase().replace(/ /g, "-");
             try {
                 let response = await fetch(`http://127.0.0.1:3001/cards/details?card=${event}`, {
                     method: 'GET',
@@ -142,9 +143,7 @@ class Form extends React.Component {
                             return <div key={card} className="cards-container">
                                 <p className="cards-container-title">{card}</p>
                                 <button onClick={() => this.getDetails(card)}
-                                        className={(card in this.state.cardsDetails) ? "cards-container-button-selected" : "cards-container-button"}>
-                                    {(card in this.state.cardsDetails) ? "Selected" : "Select"}
-                                </button>
+                                        className={(card in this.state.cardsDetails) ? "cards-container-button-selected" : "cards-container-button"}>{(card in this.state.cardsDetails)?"Selected":"Select"}</button>
                                 {(card in this.state.cardsDetails) ?
                                     <div>
                                         <div><i className="cards-container-details-icon icon fas fa-info-circle"></i>
@@ -156,11 +155,11 @@ class Form extends React.Component {
                                             </div>
                                             <div>
                                                 Balance Transfer Offer Duration: <span
-                                                className="cards-container-details-item">{this.state.cardsDetails[card].balance} months</span>
+                                                className="cards-container-details-item">{this.state.cardsDetails[card].balance} (month)</span>
                                             </div>
                                             <div>
                                                 Purchase Offer Duration: <span
-                                                className="cards-container-details-item">{this.state.cardsDetails[card].purchase} months</span>
+                                                className="cards-container-details-item">{this.state.cardsDetails[card].purchase} (month)</span>
                                             </div>
                                             <div>
                                                 Credit Available: <span
