@@ -28,16 +28,26 @@ const cards = {
   },
 };
 
+const conditionPerCard = {
+  'Student Life': {
+    'minIncome': 0,
+    'employment': 'student',
+  },
+  'Anywhere Card': {
+    'minIncome': 0,
+    'employment': ['student', 'full-time', 'part-time', 'unemployed'],
+  },
+  'Liquid Card': {
+    'minIncome': 16000,
+    'employment': ['student', 'full-time', 'part-time', 'unemployed'],
+  },
+};
+
+
 export function filterEligibleCards(employment, income) {
-  let listOfCards = [];
-  listOfCards.push('Anywhere Card');
-  if (income >= 16000) {
-    listOfCards.push('Liquid Card');
-  }
-  if (employment === 'student') {
-    listOfCards.push('Student Life');
-  }
-  return listOfCards;
+  return Object.keys(conditionPerCard)
+    .filter(card => income >= conditionPerCard[card].minIncome)
+    .filter(card => conditionPerCard[card].employment.includes(employment));
 }
 
 @Controller('cards')
@@ -62,7 +72,6 @@ export class CardsController {
     }
 
     let eligibles = filterEligibleCards(employment, income);
-
     response.status(HttpStatus.ACCEPTED).json({ eligibles: eligibles });
   }
 
@@ -77,9 +86,7 @@ export class CardsController {
     }
 
     let details = cards[card];
-
     response.status(HttpStatus.ACCEPTED).json({ details: details });
-
   }
 
 }

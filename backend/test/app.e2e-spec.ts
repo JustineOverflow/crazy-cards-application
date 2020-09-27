@@ -32,19 +32,19 @@ describe('AppController (e2e)', () => {
   it('/cards (GET) Eligible Anywhere and Liquid cards', async () => {
     const response = await request(app.getHttpServer())
       .get('/cards?employment=full-time&income=34000');
-    expect(response.body).toEqual(['Anywhere Card', 'Liquid Card']);
+    expect(response.body).toEqual({"eligibles": ['Anywhere Card', 'Liquid Card']});
   });
 
   it('/cards (GET) Eligible Anywhere, Liquid and Student cards', async () => {
     const response = await request(app.getHttpServer())
       .get('/cards?employment=student&income=17000');
-    expect(response.body).toEqual(['Anywhere Card', 'Liquid Card', 'Student Life']);
+    expect(response.body).toEqual({"eligibles": ['Student Life', 'Anywhere Card', 'Liquid Card']});
   });
 
   it('/cards (GET) Eligible Anywhere card', async () => {
     const response = await request(app.getHttpServer())
       .get('/cards?employment=part-time&income=15000');
-    expect(response.body).toEqual(['Anywhere Card']);
+    expect(response.body).toEqual({"eligibles": ['Anywhere Card']});
   });
 
   it('/cards/details (GET) details on Anywhere card', async () => {
